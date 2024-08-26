@@ -18,9 +18,9 @@ def userreg(request):
     return render(request,"secuityapp/reg.html")
 def userlogin(request):
     if request.method=="POST":
-        obj = UserReg.objects.filter(email=request.POST.get("email"),password=request.POST.get("password"))
-        if obj.count()>0:
-           request.session["ukey"]=request.POST.get("email")
+        obj = UserReg.objects.filter(email=request.POST.get("email"),password=request.POST.get("password")).first()
+        if obj!=None:
+           request.session["ukey"]=obj.fullname
            return redirect('/secuityapp/user-dashboard')
     return render(request,"secuityapp/login.html")
 

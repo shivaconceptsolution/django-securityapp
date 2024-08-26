@@ -1,5 +1,48 @@
 {% extends 'secuityapp/Layoutmaster.html' %}
 {% block middle %}
+<script>
+  function validate()
+  {
+    var email = document.getElementById("email").value;
+    var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    var password = document.getElementById("password").value;
+    var fullname = document.getElementById("fname").value;
+    var mobile = document.getElementById("mobile").value;
+    var address = document.getElementById("address").value;
+    if(atpos==-1 || dotpos==-1 || atpos>dotpos || (dotpos-atpos)<3 || dotpos+1==email.length)
+    {
+      alert('Invalid email id');
+      return false;
+    }
+    else if(password.length<6)
+    {
+        alert('Password Length Should be above six');
+        return false;
+    }
+    else if(fullname.length<8)
+    {
+      alert('fullname should be above 8 char');
+      return false;
+    }
+
+    else if(isNaN(mobile))
+    {
+       alert('mobile number should be numeric');
+       return false;
+    }
+    else if(mobile.length!=10)
+    {
+      alert('mobile number should be 10 digits');
+      return false;
+    }
+    else if(address.length<10)
+    {
+      alert('address should be above 10 character');
+      return false;
+    }
+  }
+</script>
 <section class="contact_section layout_padding">
     <div class="contact_bg_box">
       <div class="img-box">
@@ -20,23 +63,23 @@
               <div class="contact_form-container">
                 <div>
                     <div>
-                        <input type="email" placeholder="Email " name="email" />
+                        <input type="email" placeholder="Email " name="email" id="email" />
                       </div>
                       <div>
-                        <input type="password" placeholder="Password" name="password" />
+                        <input type="password" placeholder="Password" name="password" id="password" />
                       </div>
                   <div>
-                    <input type="text" placeholder="Full Name" name="fname"/>
+                    <input type="text" placeholder="Full Name" name="fname" id="fname"/>
                   </div>
                 
                   <div>
-                    <input type="text" placeholder="Phone Number" name="mobile" />
+                    <input type="text" placeholder="Phone Number" name="mobile" id="mobile" />
                   </div>
                   <div class="">
-                    <input type="text" placeholder="Address" class="message_input" name="address" />
+                    <input type="text" placeholder="Address" class="message_input" name="address" id="address" />
                   </div>
                   <div class="btn-box ">
-                    <button type="submit">
+                    <button type="submit" onclick="return validate()">
                       Register
                     </button>
                   </div>
