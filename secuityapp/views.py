@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from .models import UserReg
+from .models import UserReg,Profile
+from django.http import HttpResponse
 def home(request):
     return render(request,"secuityapp/index.html")
 def aboutus(request):
@@ -20,16 +21,50 @@ def userlogin(request):
     if request.method=="POST":
         obj = UserReg.objects.filter(email=request.POST.get("email"),password=request.POST.get("password")).first()
         if obj!=None:
-           request.session["ukey"]=obj.fullname
-           return redirect('/secuityapp/user-dashboard')
-    return render(request,"secuityapp/login.html")
+          res = HttpResponse(status=302)
+          if request.POST.get('chk'):
+            res.set_cookie('ukey',obj.email)
+            res.set_cookie('upass',obj.password)
+         
+          request.session["ukey"]=obj.email 
+          res['Location']='/secuityapp/user-dashboard'   
+          return res
+    else:
+      c1=''
+      c2=''  
+      if request.COOKIES.get('ukey'):
+        c1=request.COOKIES["ukey"]
+        c2=request.COOKIES["upass"]
+      return render(request,"secuityapp/login.html",{'username':c1,'pass':c2})
 
 def userdashboard(request):
     if request.session.has_key("ukey"):
        udata = request.session.get("ukey")
-       return render(request,"secuityapp/userdashboard.html",{"key":udata})
+       chkprofile = Profile.objects.filter(email=udata).first()
+       if chkprofile!=None:
+          data = Profile.objects.filter(email=udata) 
+          return render(request,"secuityapp/userdashboard.html",{"key":udata,"profile":data})
+       else:
+          return render(request,"secuityapp/addprofile.html")
     else:
        return redirect('/secuityapp/user-login') 
+def saveprofile(request):
+    if request.method=="POST":
+        obj = Profile(aboutme=request.POST.get("about"),hobby=request.POST.get("hobby"),email=request.session.get("ukey"))
+        obj.save()
+        return redirect('/secuityapp/user-dashboard')
+    
 def userlogout(request):
     del request.session["ukey"]
     return redirect('/secuityapp/user-login') 
+def usercookie(request):
+    response = HttpResponse("Cookie Set")
+    response.set_cookie('ckey', 'hello',max_age=10)
+    return response
+def getcookie(request):
+     a  = request.COOKIES['ckey']
+     return HttpResponse("Cookie data is "+a)
+def deletecookie(request):
+    response = HttpResponse("Cookie Set")
+    response.delete_cookie('ckey')
+    return response

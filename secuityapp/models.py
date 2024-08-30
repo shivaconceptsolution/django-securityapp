@@ -6,4 +6,9 @@ class UserReg(models.Model):
     fullname=models.CharField(max_length=50)
     mobileno=models.CharField(max_length=12)
     address=models.CharField(max_length=500)
+class Profile(models.Model):
+    aboutme=models.CharField(max_length=500)
+    hobby=models.CharField(max_length=100)
+    email=models.CharField(max_length=50)
     
+

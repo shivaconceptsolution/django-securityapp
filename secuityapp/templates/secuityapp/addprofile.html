@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Profile Here</h1>
+    <form action="save-profile" method="post">
+        {% csrf_token %}
+        <input type="text" name="about" placeholder="about me" />
+        <br>
+        <input type="text" name="hobby" placeholder="hobbies" />
+        <br>
+        <input type="submit" name="btnsubmit" value="Click" />
+    </form>
+</body>
+</html>

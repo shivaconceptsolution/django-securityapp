@@ -20,13 +20,16 @@
               <div class="contact_form-container">
                 <div>
                     <div>
-                        <input type="email" placeholder="Email " name="email" />
+                        <input type="email" placeholder="Email " name="email" value="{{username}}" />
                       </div>
                       <div>
-                        <input type="password" placeholder="Password" name="password" />
+                        <input type="password" placeholder="Password" name="password" value="{{pass}}" />
                       </div>
-                
+                  <div>
+                    <input type="checkbox" name="chk" value="remember me" {% if username %} checked {% endif %} />Remember me
+                  </div>
                   <div class="btn-box ">
+                  
                     <button type="submit">
                     Login
                     </button>

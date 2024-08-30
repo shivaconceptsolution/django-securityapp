@@ -10,4 +10,8 @@ urlpatterns=[
     path('user-login',views.userlogin,name='userlogin'),
     path('user-dashboard',views.userdashboard,name='userdashboard'),
     path('user-logout',views.userlogout,name='userlogout'),
+    path('user-cookie',views.usercookie,name='usercookie'),
+    path('get-cookie',views.getcookie,name='getcookie'),
+    path('delete-cookie',views.deletecookie,name='deletecookie'),
+    path('save-profile',views.saveprofile,name='saveprofile'),
 ]
