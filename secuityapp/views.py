@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
-from .models import UserReg,Profile
+from .models import UserReg,Profile,Job
 from django.http import HttpResponse
+from django.utils.dateparse import parse_date
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 def home(request):
     return render(request,"secuityapp/index.html")
 def aboutus(request):
@@ -50,7 +53,7 @@ def userdashboard(request):
        return redirect('/secuityapp/user-login') 
 def saveprofile(request):
     if request.method=="POST":
-        obj = Profile(aboutme=request.POST.get("about"),hobby=request.POST.get("hobby"),email=request.session.get("ukey"))
+        obj = Profile(aboutme=request.POST.get("about"),hobby=request.POST.get("hobby"),email=request.session.get("ukey"),createdate= parse_date(request.POST.get("cdate")))
         obj.save()
         return redirect('/secuityapp/user-dashboard')
     
@@ -68,3 +71,9 @@ def deletecookie(request):
     response = HttpResponse("Cookie Set")
     response.delete_cookie('ckey')
     return response
+class JobCreate(CreateView):
+    model = Job
+    fields = ['jobtitle', 'jobdescription']
+    success_url='/secuityapp/joblist'
+class JobList(ListView):
+     model = Job   # Job.objects.all()   

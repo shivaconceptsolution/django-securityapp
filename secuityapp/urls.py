@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import JobCreate,JobList
 urlpatterns=[
     path('',views.home,name='home'),
     path('aboutus',views.aboutus,name='aboutus'),
@@ -14,4 +15,8 @@ urlpatterns=[
     path('get-cookie',views.getcookie,name='getcookie'),
     path('delete-cookie',views.deletecookie,name='deletecookie'),
     path('save-profile',views.saveprofile,name='saveprofile'),
+    path('jobcreate',JobCreate.as_view()),
+    path('joblist',JobList.as_view())
+
+
 ]
