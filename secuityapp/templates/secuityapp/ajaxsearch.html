@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function searchdata(data)
+        {
+             var xmlhttp = new XMLHttpRequest();
+             xmlhttp.onreadystatechange=function(){
+                if(data!='')
+                document.getElementById("res").innerHTML=xmlhttp.responseText;
+                else
+                document.getElementById("res").innerHTML=''
+             }
+             xmlhttp.open("GET","ajaxcode?q="+data,true);
+             xmlhttp.send();
+        }
+        function displayText(a){
+            document.getElementById("txtsearch").value=a;
+        }
+        function searchrec()
+        {
+             var data = document.getElementById("txtsearch").value
+             var xmlhttp = new XMLHttpRequest();
+             xmlhttp.onreadystatechange=function(){
+                if(data!='')
+                document.getElementById("res").innerHTML=xmlhttp.responseText;
+                else
+                document.getElementById("res").innerHTML=''
+             }
+             xmlhttp.open("GET","ajaxcodenew?q="+data,true);
+             xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <p>Type Any Search Content</p>
+    <br>
+    <input type="text" id="txtsearch" onkeyup="searchdata(this.value)" />
+    <input type="button" value="search" onclick="searchrec()" />
+    <div id="res"></div>
+</body>
+</html>

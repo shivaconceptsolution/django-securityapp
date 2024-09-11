@@ -16,7 +16,13 @@ urlpatterns=[
     path('delete-cookie',views.deletecookie,name='deletecookie'),
     path('save-profile',views.saveprofile,name='saveprofile'),
     path('jobcreate',JobCreate.as_view()),
-    path('joblist',JobList.as_view())
+    path('joblist',JobList.as_view()),
+    path('upload-file',views.uploadfile,name='uploadfile'),
+    path('viewfile',views.viewfile,name='viewfile'),
+    path('ajaxsearch',views.ajaxsearch,name='ajaxsearch'),
+    path('ajaxcode',views.ajaxcode,name='ajaxcode'),
+    path('ajaxcodenew',views.ajaxcodenew,name='ajaxcodenew')
+
 
 
 ]
