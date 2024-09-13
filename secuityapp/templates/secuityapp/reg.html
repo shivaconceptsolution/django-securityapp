@@ -42,6 +42,15 @@
       return false;
     }
   }
+
+  function checkemail(data){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function(){
+       document.getElementById("spemail").innerHTML=xmlhttp.responseText
+    }
+    xmlhttp.open("GET","checkemailfun?q="+data,true);
+    xmlhttp.send();
+  }
 </script>
 <section class="contact_section layout_padding">
     <div class="contact_bg_box">
@@ -63,7 +72,8 @@
               <div class="contact_form-container">
                 <div>
                     <div>
-                        <input type="email" placeholder="Email " name="email" id="email" />
+                        <input type="email" placeholder="Email " name="email" id="email" onblur="checkemail(this.value)" />
+                        <span id="spemail"></span>
                       </div>
                       <div>
                         <input type="password" placeholder="Password" name="password" id="password" />

@@ -21,8 +21,8 @@ urlpatterns=[
     path('viewfile',views.viewfile,name='viewfile'),
     path('ajaxsearch',views.ajaxsearch,name='ajaxsearch'),
     path('ajaxcode',views.ajaxcode,name='ajaxcode'),
-    path('ajaxcodenew',views.ajaxcodenew,name='ajaxcodenew')
-
+    path('ajaxcodenew',views.ajaxcodenew,name='ajaxcodenew'),
+    path('checkemailfun',views.checkemailfun,name='checkemailfun'),
 
 
 ]

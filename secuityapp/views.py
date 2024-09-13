@@ -106,3 +106,9 @@ def ajaxcode(request):
 def ajaxcodenew(request):
     data = UserReg.objects.filter(fullname=request.GET["q"])
     return render(request,"secuityapp/ajaxcodenew.html",{"key":data})
+def checkemailfun(request):
+    data = UserReg.objects.filter(email=request.GET["q"]).first()
+    if data!=None:
+        return HttpResponse("email already exist")
+    else:
+       return HttpResponse(" ")
